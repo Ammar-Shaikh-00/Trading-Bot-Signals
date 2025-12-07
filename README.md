@@ -20,7 +20,7 @@ Quick Start
 
 - Requirements: pip install requests pandas numpy (optional: ta-lib if you want to extend indicators).
 - Run scalping: python Scalping-Signals.py
-- Run day/swing: python "Etsy Nich/Day+Swing-Signals.py"
+- Run day/swing: python "Day+Swing-Signals.py"
 - Tweak config: edit SYMBOLS , EXTENDED_SYMBOLS , EXTENDED_SCAN_EVERY , MIN_SCORE , MAX_SL_PCT , and intervals to fit your preferences.
 Notes
 
