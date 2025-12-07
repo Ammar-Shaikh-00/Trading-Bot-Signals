@@ -107,18 +107,18 @@ TP3_R = 4.0
 MAX_SL_PCT = 1.5
 
 # Signal Quality
-MIN_SCORE = 60
-MIN_SCORE_VOLATILE = 65
+MIN_SCORE = 55
+MIN_SCORE_VOLATILE = 60
 CONSECUTIVE_SIGNALS = 1
 LONG_BIAS = 0.9
-COOLDOWN_MIN = 3
+COOLDOWN_MIN = 1
 
 # Debugging
 DEBUG_LOG = False
 QUIET_ERRORS = True
 
 # Market Hours (avoid low liquidity periods)
-AVOID_LOW_LIQUIDITY = True
+AVOID_LOW_LIQUIDITY = False
 LOW_LIQUIDITY_HOURS = [
     (0, 2),
     (22, 24)
