@@ -7,6 +7,7 @@ from datetime import datetime
 from collections import defaultdict
 
 LOG_FILE = 'signals.log'
+PRINT_SIGNALS = True  # print concise signals to console when emitted
 
 def log_signal(s, log_file=LOG_FILE):
     try:
@@ -23,6 +24,15 @@ def log_signal(s, log_file=LOG_FILE):
                 s['symbol'], s.get('mode','day'), s['interval'], s['side'], s['price'], s['sl'], s['tp1'], s['tp2'], s['tp3'],
                 s['atr_pct'], s['rsi'], s['adx'], s['slope'], s['vwap_side'], s['vol_mult'], s['sr_low'], s['sr_high'], s['score'], s['regime'], s['rr']
             ])
+        if PRINT_SIGNALS:
+            try:
+                print(
+                    f"SIGNAL {s['symbol']} {s['side']} @ {float(s['price']):.4f} "
+                    f"SL {float(s['sl']):.4f} TP1 {float(s['tp1']):.4f} "
+                    f"score {int(s['score'])} rr {s.get('rr','-')} interval {s['interval']}"
+                )
+            except Exception:
+                pass
     except Exception as e:
         try:
             if DEBUG:
@@ -55,9 +65,9 @@ TP1_R = 1.0
 TP2_R = 2.5
 TP3_R = 4.0
 EMA_SLOPE_MIN = 0.018
-COOLDOWN_MIN = 30
+COOLDOWN_MIN = 10
 LOOKBACK = 500
-MIN_SCORE = 90
+MIN_SCORE = 80
 
 
 
@@ -135,22 +145,22 @@ PARTIAL_EXIT_1 = 0.6     # exit 60% at TP1 (secure more profit early)
 PARTIAL_EXIT_2 = 0.25    # exit 25% at TP2
 
 # Signal Quality (Ultra High Accuracy)
-MIN_SCORE = 90           # ultra-high threshold for perfect signals
-MIN_SCORE_VOLATILE = 95  # maximum threshold for volatile conditions
-MIN_SCORE_CONFLUENCE = 85 # minimum score for confluence signals
-COOLDOWN_MIN = 30        # 30min cooldown between signals
-CONSECUTIVE_SIGNALS = 2  # require confirmation
+MIN_SCORE = 80           # lowered for diagnostics
+MIN_SCORE_VOLATILE = 85  # slightly lowered for volatile conditions
+MIN_SCORE_CONFLUENCE = 80 # align with diagnostic threshold
+COOLDOWN_MIN = 10        # shorter cooldown for more frequent checks
+CONSECUTIVE_SIGNALS = 1  # single confirmation in diagnostics
 HISTORY_WINDOW_MIN = 30  # 30min window for tracking signals
 CONFLUENCE_WEIGHT = 1.5  # weight multiplier for confluence signals
 
 # Momentum Filters (NEW)
-MIN_MOMENTUM_CHANGE = 0.01  # minimum % price change in last 2 candles
-MIN_VOLUME_SPIKE = 1.3     # minimum volume spike vs average
-RSI_MOMENTUM_MIN = 4       # RSI must move at least 5 points from neutral
-MACD_MOMENTUM_MIN = 0.1    # MACD histogram must show clear momentum
+MIN_MOMENTUM_CHANGE = 0.005  # relaxed for diagnostics
+MIN_VOLUME_SPIKE = 1.15      # relaxed for diagnostics
+RSI_MOMENTUM_MIN = 3         # relaxed for diagnostics
+MACD_MOMENTUM_MIN = 0.06     # relaxed for diagnostics
 
 # Market Hours (avoid low liquidity periods)
-AVOID_LOW_LIQUIDITY = True
+AVOID_LOW_LIQUIDITY = False
 LOW_LIQUIDITY_HOURS = [
     (0, 2),              # UTC hours to avoid (low volume)
     (22, 24)
