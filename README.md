@@ -2,7 +2,7 @@
 - Advanced crypto signal suite for high-accuracy scalping and disciplined day/swing trading on Binance USDT perpetuals.
 - Two scripts:
   - Scalping-Signals.py : 1m primary with 5m confirm and 15m trend, optimized for scalps.
-  - Etsy Nich/Day+Swing-Signals.py : 15m/1h/4h framework for cleaner, higher-RR swings.
+  - Day+Swing-Signals.py : 15m/1h/4h framework for cleaner, higher-RR swings.
 Highlights (Scalping)
 
 - 40 liquid symbols ( SYMBOLS ) with EXTENDED_SYMBOLS and staggered cadence via EXTENDED_SCAN_EVERY .
